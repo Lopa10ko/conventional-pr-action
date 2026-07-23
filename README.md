@@ -14,6 +14,11 @@ Ideal when your team **squash-merges** pull requests: GitHub uses the **PR title
 
 With squash and merge, a conventional PR title (`feat(scope): add …`) becomes a conventional commit on the default branch—so this action is a natural gate before merge.
 
+> [!TIP]
+> In the consuming repository, set **Settings → General → Pull Requests → Allow squash merging** to **Pull request title**.
+> 
+> Otherwise GitHub may prefill the squash commit from a single commit’s message instead of the validated PR title (and the merge dialog can keep a stale value until you refresh).
+
 ## Usage
 
 ```yml
