@@ -1,0 +1,17 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify action entrypoint exists
+        run: |
+          test -f action.yml
+          test -f dist/index.js
+          echo "Release tag ${GITHUB_REF_NAME} looks ready for consumers (e.g. @v1)."

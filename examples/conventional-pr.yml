@@ -1,0 +1,40 @@
+# Example consumer workflow — copy into another repo as
+# .github/workflows/conventional-pr.yml
+#
+# Minimal usage (all defaults):
+#   - uses: Lopa10ko/conventional-pr-action@v1
+#     with:
+#       github_token: ${{ secrets.GITHUB_TOKEN }}
+
+name: Conventional PR Title and Description
+
+on:
+  pull_request:
+    types:
+      - opened
+      - edited
+
+jobs:
+  validate-pr:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+      issues: write
+    steps:
+      - name: Validate PR Title and Description
+        uses: Lopa10ko/conventional-pr-action@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          min_title_length: 40
+          validate_description: true
+          validate_title_length: true
+          validate_lowercase: true
+          valid_types: feat,fix,docs,style,refactor,perf,test,chore,build,ci,revert,release
+          description_hint: Please provide a description of your ML/AutoML changes.
+          post_comment: true
+          manage_labels: true
+          examples: |
+            feat(automl): add neural architecture search for tabular data
+            fix(model): resolve data leakage in cross-validation strategy
+            perf(inference): optimize model serving with ONNX runtime
+            docs(mlops): add comprehensive deployment documentation

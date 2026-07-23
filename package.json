@@ -1,0 +1,33 @@
+{
+  "name": "conventional-pr-action",
+  "version": "1.0.0",
+  "description": "GitHub Action to validate PR titles and descriptions against Conventional Commits",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "ncc build src/index.js -o dist --license licenses.txt",
+    "test": "node --test test/*.test.js",
+    "all": "npm run build && npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lopa10ko/conventional-pr-action.git"
+  },
+  "keywords": [
+    "github-actions",
+    "conventional-commits",
+    "pull-request",
+    "validation"
+  ],
+  "author": "Lopa10ko",
+  "license": "BSD-3-Clause",
+  "dependencies": {
+    "@actions/core": "^1.11.1",
+    "@actions/github": "^6.0.0"
+  },
+  "devDependencies": {
+    "@vercel/ncc": "^0.38.3"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

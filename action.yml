@@ -1,0 +1,95 @@
+name: 'Conventional PR Title and Description'
+description: 'Validate conventional PR titles (ideal before squash-and-merge), optionally require a description, comment results, and manage labels'
+author: 'Lopa10ko'
+inputs:
+  github_token:
+    description: 'GitHub token with pull-requests: write and issues: write'
+    required: false
+    default: ${{ github.token }}
+  min_title_length:
+    description: 'Minimum PR title length (number). Blank uses default 30.'
+    required: false
+    default: '30'
+  valid_types:
+    description: 'Comma-separated conventional commit types (e.g. feat,fix,docs)'
+    required: false
+    default: 'feat,fix,docs,style,refactor,perf,test,chore,build,ci,revert,release'
+  validate_description:
+    description: 'Validate that the PR body is non-empty (boolean). Title format is always validated.'
+    required: false
+    default: 'true'
+  validate_title_length:
+    description: 'Validate minimum title length (boolean). Title format is always validated.'
+    required: false
+    default: 'true'
+  validate_lowercase:
+    description: 'Validate that the first word after the colon starts with lowercase (boolean)'
+    required: false
+    default: 'true'
+  skip_on_commit_push:
+    description: 'Skip validation when PR is edited only by new commits (not title/body)'
+    required: false
+    default: 'true'
+  comment_identifier:
+    description: 'Unique marker used to find and update the bot comment'
+    required: false
+    default: 'PR Title Validation'
+  fail_on_error:
+    description: 'Fail the workflow when validation fails'
+    required: false
+    default: 'true'
+  description_hint:
+    description: 'Hint shown when the PR description is missing'
+    required: false
+    default: 'Please provide a description of your changes.'
+  examples:
+    description: 'Newline-separated example titles shown on failure'
+    required: false
+    default: |
+      feat(scope): add support for new feature
+      fix(scope): resolve edge case in validation
+      docs(readme): document conventional PR requirements
+  post_comment:
+    description: 'Post or update a PR comment with validation results'
+    required: false
+    default: 'true'
+  manage_labels:
+    description: 'Add/remove needs-* labels based on validation results'
+    required: false
+    default: 'true'
+  label_needs_fix:
+    description: 'Label applied on any validation failure'
+    required: false
+    default: 'needs-fix'
+  label_needs_title_fix:
+    description: 'Label when conventional title format fails'
+    required: false
+    default: 'needs-title-fix'
+  label_needs_title_length:
+    description: 'Label when title length check fails'
+    required: false
+    default: 'needs-title-length'
+  label_needs_title_case:
+    description: 'Label when lowercase-after-colon check fails'
+    required: false
+    default: 'needs-title-case'
+  label_needs_description:
+    description: 'Label when description check fails'
+    required: false
+    default: 'needs-description'
+
+outputs:
+  valid:
+    description: 'Whether the PR passed validation (true/false)'
+  skipped:
+    description: 'Whether validation was skipped (true/false)'
+  issues:
+    description: 'Comma-separated list of validation issues'
+
+runs:
+  using: 'node20'
+  main: 'dist/index.js'
+
+branding:
+  icon: 'check-circle'
+  color: 'green'
