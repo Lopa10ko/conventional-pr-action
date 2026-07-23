@@ -1,5 +1,5 @@
 name: 'Conventional PR Title and Description'
-description: 'Validate conventional PR titles (ideal before squash-and-merge), optionally require a description, comment results, and manage labels'
+description: 'Validate conventional PR titles; optional description check, comments, and labels'
 author: 'Lopa10ko'
 inputs:
   github_token:
@@ -91,5 +91,5 @@ runs:
   main: 'dist/index.js'
 
 branding:
-  icon: 'check-circle'
-  color: 'green'
+  icon: 'git-pull-request'
+  color: 'blue'

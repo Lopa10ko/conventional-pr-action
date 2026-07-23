@@ -4,8 +4,6 @@ GitHub Action that validates pull request **titles** (and optionally description
 
 Ideal when your team **squash-merges** pull requests: GitHub uses the **PR title** as the default squash commit subject. Checking the title before merge keeps `main` history Conventional-Commits-friendly without enforcing every intermediate commit on the branch.
 
-Packaged as a reusable action in its own repository, following [GitHub’s guidance for managing custom actions](https://docs.github.com/en/actions/how-tos/create-and-publish-actions/manage-custom-actions) (document inputs/outputs, prefer version tags such as `@v1`, do not pin consumers to the default branch).
-
 ## Why squash and merge
 
 | Workflow | What becomes the commit on `main` |
@@ -17,8 +15,6 @@ Packaged as a reusable action in its own repository, following [GitHub’s guida
 With squash and merge, a conventional PR title (`feat(scope): add …`) becomes a conventional commit on the default branch—so this action is a natural gate before merge.
 
 ## Usage
-
-Pin a **major version tag** (recommended) or a specific patch tag—not `@main`:
 
 ```yml
 name: Conventional PR Title and Description
@@ -120,21 +116,6 @@ On failure (when `manage_labels` is on): `needs-fix`, `needs-title-fix`, `needs-
 
 Title format cannot be disabled. Turn off optional checks with `validate_description: false`, `validate_title_length: false`, or `validate_lowercase: false`.
 
-## Versioning
-
-Per [GitHub’s tag-based release management](https://docs.github.com/en/actions/how-tos/create-and-publish-actions/manage-custom-actions#using-tags-for-release-management):
-
-```yml
-uses: Lopa10ko/conventional-pr-action@v1      # major (recommended)
-uses: Lopa10ko/conventional-pr-action@v1.0.0 # exact patch
-```
-
-See [RELEASE.md](RELEASE.md) for how maintainers cut releases.
-
-## Compatibility
-
-Uses [`@actions/github`](https://github.com/actions/toolkit/tree/main/packages/github) so API URLs come from the runner environment (`GITHUB_API_URL`), including GitHub Enterprise—no hardcoded `https://api.github.com`.
-
 ## Development
 
 ```bash
@@ -143,7 +124,7 @@ npm test
 npm run build
 ```
 
-`dist/` is the bundled entrypoint referenced by `action.yml` (`runs.using: node20`). Commit updated `dist/` before tagging a release.
+`dist/` is the bundled entrypoint referenced by `action.yml` (`runs.using: node20`).
 
 ## License
 
